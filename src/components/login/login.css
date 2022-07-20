@@ -1,0 +1,49 @@
+.login{
+    height: 45vh;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    margin:0 auto;
+    margin-top: 5rem;
+    border-radius: 10px;
+    background: rgba( 255, 255, 255, 0.35 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 9.5px );
+    -webkit-backdrop-filter: blur( 9.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.login button{
+    padding: 1px 10px;
+    color:rgb(65, 68, 67) ;
+    border-radius: 5px;
+    border: 2px solid rgb(14, 8, 19);
+}
+.login input{
+    height: 7%;
+    border:2px double rgb(44, 37, 48);
+    border-radius: 5px;
+}
+label{
+    margin-bottom: 10px;
+}
+input{
+    margin-bottom: 10px;
+}
+.closer{
+    position: absolute;
+    top: 3rem;
+    left: 80%;
+}
+@media screen and (max-width: 600px) {
+    .login{
+        top: 25vw;
+        height: 50vh;
+        width: 70vw;
+        left: 10vw;
+        font-size: small;
+    }
+  }
