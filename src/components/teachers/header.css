@@ -1,0 +1,19 @@
+.navbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.navbar-brand{
+    width: 100%;
+}
+.me-auto{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 18%;
+}
+.lastitem{
+    font-size: larger;
+    padding: 0%;
+    width: 20%;
+}

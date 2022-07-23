@@ -1,0 +1,35 @@
+.courseMain{
+    padding: 2rem;
+    width: 100%;
+    border-radius: 10px;
+    background: rgba( 255, 255, 255, 0.35 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 9.5px );
+    -webkit-backdrop-filter: blur( 9.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.coursesHead{
+    width: 100%;
+    margin: 0px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 2rem;
+    background-color: antiquewhite;
+}
+.coursesHead p{
+    margin: 0px;
+}
+.coursesHead :first-child{
+    margin-right: 1rem;
+}
+.coursesHead .btn{
+    margin-left: 75vw;
+}
+.coursesHead .btn :first-child{
+    padding: 0px;
+    margin: 0px;
+    font-size: 2rem;
+}
