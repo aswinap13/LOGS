@@ -2,3 +2,25 @@
     padding: 3rem;
     background-color: aliceblue;
 }
+.indCourse{
+    cursor: pointer;
+    background-color: aliceblue;
+}
+.CourseDetails{
+    background-color: rgb(255, 255, 255);
+    width: 99vw;
+    height: 90vh;
+    transition:width 2s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: default;
+}
+.closer{
+    position: absolute;
+    top: 1rem;
+    left: 95%;
+    background-color: none;
+    border: 2px solid grey;
+    border-radius: 5px;
+}

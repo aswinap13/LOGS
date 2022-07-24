@@ -2,11 +2,14 @@ import React from 'react'
 import { Button,Card } from 'react-bootstrap';
 import './login.css';
 
-function Login() {
+function Login(props) {
+  const setloginVisible=props.setloginVisible;
+  const LoginShow=props.LoginShow;
+
   return (
         <div className='container'>
             <form className='login'>          
-              <button type='button' className='closer'>
+              <button type='button' className='closer' onClick={() => setloginVisible(!LoginShow)}>
                 <span aria-hidden="true">&times;</span>
               </button>
                 
