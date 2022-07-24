@@ -1,11 +1,12 @@
 import React from 'react'
 import './course.css'
 
-function Course() {
+function Course({ subject }) {
+
   return (
     <div className='courseComp'>
-        Fetch course name and display course code and onclick expansion
-
+      <p>{subject.name}</p>
+      <p>{subject.description}</p>
     </div>
   )
 }

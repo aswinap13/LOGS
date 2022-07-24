@@ -1,8 +1,8 @@
 import React from 'react'
 
-function StaffC() {
+function StaffC({ userdata }) {
   return (
-    <div>Thara R J</div>
+    <div>{userdata.first_name} {userdata.last_name}</div>
   )
 }
 

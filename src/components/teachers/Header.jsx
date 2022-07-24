@@ -8,7 +8,7 @@ import StaffC from './StaffC';
 import './header.css'
 
 
-function Header() {
+function Header({ userdata }) {
   return (
     <div>
       <Navbar bg="light" expand="lg">
@@ -19,7 +19,7 @@ function Header() {
           </>
         </Navbar.Brand>
         <Nav className="me-auto nav-link">
-            <Nav.Link className='navbar-item btn ' variant='danger'><StaffC/></Nav.Link>
+            <Nav.Link className='navbar-item btn ' variant='danger'><StaffC userdata={ userdata }/></Nav.Link>
             <Nav.Link className='navbar-item btn lastitem' variant='danger'>
               <GiHamburgerMenu/>
             </Nav.Link>
