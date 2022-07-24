@@ -37,6 +37,12 @@ input{
     position: absolute;
     top: 1rem;
     left: 80%;
+    background-color: none;
+    border: 2px solid grey;
+    border-radius: 5px;
+}
+.error {
+    color: rgb(216, 33, 33);
 }
 @media screen and (max-width: 600px) {
     .login{

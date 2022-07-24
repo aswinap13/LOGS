@@ -1,18 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { HiOutlineDesktopComputer } from 'react-icons/hi';
 import { GrAddCircle } from 'react-icons/gr';
 import Course from './Course'
 import './courses.css'
-import { useState, useEffect } from 'react';
+import AddCourse from './AddCourse';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
 function Courses() {
 
   const navigate = useNavigate()
-  
+
   const [subjects, setSubjects] = useState([]);
+  const [vis,setVis]=useState(false)
+  
+  const addCourse = ()=>{
+    setVis(!vis)
+  }
 
   let token;
 
@@ -67,7 +73,7 @@ function Courses() {
         <div className="coursesHead" >
             <HiOutlineDesktopComputer/>
             <p>COURSES</p>
-            <button className='btn'>
+            <button className='btn' onClick={addCourse}>
               <GrAddCircle/>
             </button>
         </div>
@@ -76,6 +82,8 @@ function Courses() {
             <Course key={subject.id} subject={subject}/>
           ))}
         </div>
+
+        {vis && <AddCourse/>}
 
         {/* Navigate to be loaded here Once the Button in Header is clicked */}
 

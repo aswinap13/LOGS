@@ -27,7 +27,7 @@ function Navbare() {
       </Container>
     </Navbar>
        {loginVisible && (
-        <Login/>
+        <Login setloginVisible={setloginVisible} LoginShow={LoginShow}/>
       )}
     </div>
   )

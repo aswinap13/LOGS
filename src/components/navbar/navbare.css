@@ -6,11 +6,11 @@
     flex-direction: row;
 }
 .navbar-brand{
-    width: 50%;
+    width: 100% !important;
     font-size: 2rem !important;
 }
 .nav-link{
     margin: 0 auto;
     text-align: center;
-    width: 50%;
+    width: 100% !important;
 }
