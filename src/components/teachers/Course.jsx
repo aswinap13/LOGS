@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import './course.css'
+import Assessment from './concomponent/Assessment';
+import Student from './concomponent/Student';
+import Feedback from './concomponent/Feedback';
 
 function Course() {
   return (
@@ -34,25 +37,70 @@ function IndCourse(){
 function CourseIn(props){
   const courseOpen=props.courseOpen;
   const setCourseOpen=props.setCourseOpen;
+
+  const [studv,setStudv] = useState(false)
+  const [assesv,setAssesv] = useState(false)
+  const [feedv,setFeedv] = useState(false)
+
+
+  const togglestd =()=>{
+    setStudv(!studv)
+    if(assesv){
+      setAssesv(!assesv)
+    }
+    if(feedv){
+      setFeedv(!feedv)
+    }
+  }
+  const toggleass = ()=>{
+    setAssesv(!assesv)
+    if(studv){
+      setStudv(!studv)
+    }
+    if(feedv){
+      setFeedv(!feedv)
+    }
+  }
+  const togglefee =() =>{
+    setFeedv(!feedv)
+    if(assesv){
+      setAssesv(!assesv)
+    }
+    if(studv){
+      setStudv(!studv)
+    }
+  }
+
   return(
     <div className="CourseDetails">
-      <header>This is header containing course name</header>
+      <header>CST 302 : Formal Languages</header>
       <div className="courseContent">
         <div className="selectButton">
-          <button>Home</button>
-          <button>Students</button>
-          <button>Assessments</button>
-          <button>FeedBack</button>
+          <button >Home
+          </button>
+          <button onClick={togglestd}>Students
+          </button>
+          <button onClick={toggleass}>Assessments
+          </button>
+          <button onClick={togglefee}>FeedBack
+          </button>
         </div>
         <div className="selecti">
-          <div className="courseHome">This contains course Description</div>
-          <div className="courseStudent">This is 1/3 of coursecomponent and display student component</div>
-          <div className="courseAssess">This is 1/3 of coursecomponent and display assessment</div>
-          <div className="courseFeedBack">This is 1/3 of coursecomponent and display feedback</div>
+          <div className="courseHome">Details regarding Course</div>
+          {studv && 
+            <div className="courseStudent"><Student/></div>
+          }
+          {
+            assesv && <div className="courseAssess"><Assessment/></div>
+          }
+          
+          {
+            feedv && <div className="courseFeedBack"><Feedback/></div>
+          }
         </div>
       </div>
 
-      <button type='button' className='closer' onClick={() => {setCourseOpen(!courseOpen)}}>
+      <button type='button' className='closerco' onClick={() => {setCourseOpen(!courseOpen)}}>
                 <span aria-hidden="true">&times;</span>
       </button>
     </div>

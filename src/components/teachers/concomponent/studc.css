@@ -1,0 +1,25 @@
+.studinCourse{
+    border: 1px dashed grey;
+}
+.assesshead{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px dashed grey;
+    padding:0rem 15px !important;
+}
+.assesshead p{
+    margin :0px; padding: 0px;
+}
+.addassess{
+    border: 2px solid royalblue;
+    padding: 1rem;
+    margin: 0 auto;
+}
+.feedbackstaff{
+    text-align: center;
+    padding: 1rem;
+    border: 1px dashed grey;
+}
