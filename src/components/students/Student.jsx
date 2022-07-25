@@ -3,8 +3,8 @@ import './stud.css';
 
 function Student() {
   return (
-    <div className='naa'>
-        hey there
+    <div className='student'>
+        
     </div>
   )
 }

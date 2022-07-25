@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { GrAddCircle } from 'react-icons/gr';
+import { Form } from 'react-bootstrap';
 
 function Feedback({ subjectid, feedv }) {
 
@@ -56,12 +58,31 @@ function Feedback({ subjectid, feedv }) {
 
   return (
     <div className='feedbackstaff'>
-        <p>
-            Feedbacks
-        </p>
+        <header className='assesshead'>
+                <p>Feedbacks</p>
+                <button className='btn'>
+                <GrAddCircle/>
+                </button>
+        </header>
+        <FeedbackForm/>
+
         {/* map feedback and give detail, on clicking each feedback, show the feedback responses */}
     </div>
   )
 }
 
+
+function FeedbackForm(){
+  return(
+    <div className="feedForm">
+      <Form>
+        <label>Title</label>
+        <input ></input>
+        <label>Description</label>
+        <textarea ></textarea>
+        <button className='btn mt-4'>Create</button>
+      </Form>
+    </div>
+  )
+}
 export default Feedback

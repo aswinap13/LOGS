@@ -28,15 +28,22 @@ Form{
     flex-direction: column;
     padding: 2rem;
 }
-Form input{
+.formitem input{
     margin: 0 auto;
     text-align: center;
     width: 70%;
+    padding: 0px !important;
+}
+.formitem label{
+    padding: 0px;
+    margin: 0px;
 }
 .formitem{
+    padding: 1rem;
     width: 100%;
     display: flex;
     justify-content: space-around;
+    align-items: center !important;
 }
 .Form .lo{
     width: 100%;

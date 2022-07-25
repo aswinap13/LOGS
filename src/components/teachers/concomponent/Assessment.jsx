@@ -43,9 +43,6 @@ function AssessComp({ subjectid, los }){
 
     return(
         <div className='addassess'>
-            <p>
-                Add Assessment
-            </p>
 
             <Form>
                 <label>Title</label>
@@ -53,7 +50,7 @@ function AssessComp({ subjectid, los }){
                 <label>Description</label>
                 <textarea value={description} onChange={(e) => {setDescription(e.target.value)}}></textarea>
                 {questions.map(que => (    
-                  <div key={que.id}>                 
+                  <div className='addqustn' key={que.id}>                 
                     <label>Question {que.id + 1}: </label>
                     <input name="question" type="text" value={que.question} onChange={(e) => setQues(e.target.value, que.id)}></input>
                     <label>Learning Outcomes</label>
@@ -66,10 +63,10 @@ function AssessComp({ subjectid, los }){
                     <button>Suggest</button>
                   </div>
                 ))}
-                <button className='btn' onClick={addQues}>
+                <button className='btn addNQ' onClick={addQues}>
                 <GrAddCircle/>
                 </button>
-          
+          <button className='btn' type='submit'>Add Test</button>
             </Form>
         </div>
     )
