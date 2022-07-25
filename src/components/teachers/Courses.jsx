@@ -23,7 +23,7 @@ function Courses() {
   let token;
 
   if (localStorage.getItem('logs-token') === null) {
-      navigate('/Login');
+      navigate('/login');
   } else {
       token = localStorage.getItem('logs-token');
   }
@@ -48,16 +48,14 @@ function Courses() {
           return response.json().then(text => {throw text})
         }
     }).then(data => {
-        console.log(data)
         setSubjects(data)
     }).catch(err => {
-        console.log(err)
         if (err.detail) {
           alert('Please login again....');
-          navigate('/Login');
+          navigate('/login');
         } else if (err.Message) {
           alert(err.Message);
-          navigate('/Login');
+          navigate('/login');
         } else {
           alert('Something occured, please refresh the page...');
         }
@@ -66,7 +64,7 @@ function Courses() {
 
   useEffect(() => {
     fetchSubjects();
-  }, []) 
+  }, [vis]) 
 
   return (
     <div className='courseMain' >
@@ -83,7 +81,7 @@ function Courses() {
           ))}
         </div>
 
-        {vis && <AddCourse/>}
+        {vis && <AddCourse setVis={setVis}/>}
 
         {/* Navigate to be loaded here Once the Button in Header is clicked */}
 

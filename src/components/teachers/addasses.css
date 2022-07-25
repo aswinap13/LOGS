@@ -1,7 +1,7 @@
 .addasses{
     border: 2px solid black;
     position: absolute;
-    top:30%;
+    top:10%;
     margin: 0 auto;
     right: 10%;
     background-color: rgb(254, 247, 196);
@@ -47,4 +47,15 @@ Form button{
     margin: 0 auto;
     border: 2px dotted grey !important;
     width: 50%;
+}
+.error {
+    color: black;
+}
+.closerco{
+    position: absolute;
+    top: 1rem;
+    left: 95%;
+    background-color: none;
+    border: 2px solid grey;
+    border-radius: 5px;
 }

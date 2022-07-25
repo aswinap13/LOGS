@@ -10,7 +10,7 @@
 .CourseDetails{
     background-color: rgb(255, 255, 255);
     width: 100%;
-    height: 90vh;
+    height: 100%;
     transition:width 2s;
     position: absolute;
     top: 0;

@@ -1,6 +1,11 @@
 .studinCourse{
     border: 1px dashed grey;
 }
+.stdIndComp {
+    margin-top: 1em;
+    padding: 1em;
+    border: 1px solid black;
+}
 .assesshead{
     display: flex;
     flex-direction: row;

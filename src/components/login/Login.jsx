@@ -45,7 +45,7 @@ function Login(props) {
       } else if (data.is_student) {
         navigate('/student')
       } else {
-        navigate('/Staff', { state: data })
+        navigate('/Staff')
       }
     }).catch(err => {
       if (err.Message) { // when user account not approved yet, code: 401
