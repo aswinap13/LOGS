@@ -1,12 +1,21 @@
 import React from 'react'
 import './studc.css'
+import { GrAddCircle } from 'react-icons/gr';
 
 function Student({ students }) {
   return (
-    <div className='studinCourse'>
-        { students.map(student => (    
-            <StudentInd key={student.id} student={student}/>
-        )) }
+    <div>     
+        <header className='studHead'>
+            <p>Add Student</p>
+            <button className='btn'>
+            <GrAddCircle/>
+            </button>
+        </header>
+        <div>
+            { students.map(student => (    
+                <StudentInd key={student.id} student={student}/>
+            )) }
+        </div>
     </div>
   )
 }

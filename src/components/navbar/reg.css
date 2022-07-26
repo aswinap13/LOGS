@@ -1,0 +1,30 @@
+.reg{
+    top: 2rem;
+    left: 30vw;
+    position: absolute;
+    width: 40vw;
+    height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-top: 5rem;
+    border-radius: 10px;
+    background: rgba( 255, 255, 255, 0.35 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 9.5px );
+    -webkit-backdrop-filter: blur( 9.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.reg-sub{
+    width: 40%;
+    margin-top: 2rem;
+    padding: 10px;
+}
+.error {
+    color: rgb(216, 33, 33) !important;
+    margin-top: 20px;
+    margin-bottom: -10px;
+}

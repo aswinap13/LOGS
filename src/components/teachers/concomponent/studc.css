@@ -1,10 +1,19 @@
-.studinCourse{
+.studHead{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
     border: 1px dashed grey;
+    padding: 10px !important;
 }
 .stdIndComp {
     margin-top: 1em;
     padding: 1em;
-    border: 1px solid black;
+    border: 1px solid grey;
+}
+.stdIndComp p {
+    margin-bottom: 8px;
 }
 .assesshead{
     display: flex;
@@ -16,15 +25,54 @@
     padding:0rem 15px !important;
 }
 .assesshead p{
-    margin :0px; padding: 0px;
+    text-align: center;
 }
 .addassess{
-    border: 2px solid royalblue;
+    border: 2px solid rgb(97, 97, 97);
     padding: 1rem;
     margin: 0 auto;
 }
+
+.assesslist{
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid grey;
+}
+
 .feedbackstaff{
     text-align: center;
     padding: 1rem;
     border: 1px dashed grey;
+}
+.addqustn{
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: 1rem !important;
+    flex-direction: row !important;
+}
+.addqustn button{margin: 0px;
+    margin-left: 1rem;
+    width: 10% !important;
+}
+.addqustn input{
+    width: 200%;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+.addqustn label{
+    width: 100%;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+.addNQ{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.error {
+    text-align: center;
+    color: rgb(216, 33, 33) !important;
+    font-size: large;
+    margin-top: 20px;
+    margin-bottom: -10px;
 }

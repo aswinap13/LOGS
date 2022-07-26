@@ -1,0 +1,87 @@
+.studBody{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding: 1rem;
+}
+.studProfile{
+    border: 2px solid grey;
+    width: 30%;
+    padding: 1rem;
+    text-align: center;
+}
+.studProfile p {
+    margin-bottom: 5px;
+}
+
+.studReview{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+    border: 2px solid grey;
+    width: 60%;
+    padding: 1rem;
+}
+.studReview div {
+    width: 100%
+}
+
+.detailReview{
+    width: 100%;
+}
+.canvas{
+    width: 100%;
+}
+
+.feedbackform {
+    margin-top: 5px;
+    padding: 1rem;
+    background-color: bisque;
+}
+.feedbackform textarea {
+    width: 100%
+}
+.feedbackform button {
+    margin-top: 5px;
+}
+
+.subjects {
+    display: grid;
+}
+.subjects button {
+    margin-top: 1rem;
+}
+.assessments {
+    width: 100%;
+}
+.assessDetail {
+    border: 1px solid black;
+    margin: 1rem 0;
+    padding: 0.5rem;
+}
+.assessDetail p {
+    margin-bottom: 5px;
+}
+.assessDetail button {
+    border: 1px dashed grey;
+}
+.assessDetail ul {
+    margin-top: 5px;
+}
+
+.feedbacks {
+    width: 100%
+}
+.feedDetail {
+    border: 1px solid black;
+    margin: 1rem 0;
+    padding: 0.5rem;
+}
+.feedDetail p {
+    margin-bottom: 5px;
+}
+.feedDetail button {
+    border: 1px dashed grey;
+}

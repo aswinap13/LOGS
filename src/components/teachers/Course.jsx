@@ -47,6 +47,7 @@ function CourseIn(props){
   const [assesv,setAssesv] = useState(false)
   const [feedv,setFeedv] = useState(false)
   const [subdata, setSubdata] = useState(null)
+  const [updated, setUpdated] = useState(false)
 
 
   const togglestd =()=>{
@@ -122,7 +123,7 @@ function CourseIn(props){
     if (courseOpen === true) {
       fetchSubject();
     }
-  }, [courseOpen])
+  }, [courseOpen, updated])
 
   return(
     <div className="CourseDetails">
@@ -150,6 +151,8 @@ function CourseIn(props){
                             subjectid={subject.id}
                             assessments={subdata.assessments} 
                             los={subdata.learning_outcomes}
+                            updated={updated}
+                            setUpdated={setUpdated}
                           />
                         </div>
             }

@@ -65,15 +65,16 @@ function Login(props) {
   return (
         <div className='container'>
             <form className='login'>          
-              <button type='button' className='closer' onClick={() => setloginVisible(!LoginShow)}>
+              <button type='button' className='closerl' onClick={() => setloginVisible(!LoginShow)}>
                 <span aria-hidden="true">&times;</span>
               </button>
-                { error && <p className='error'>{ error }</p>}
+                
                 <label htmlFor="userID">User ID</label>
                 <input type="text" value={username} onChange={(e) => {setUsername(e.target.value)}}></input>
                 <label htmlFor="userID">Password</label>
                 <input type="password" value={password} onChange={(e) => {setPassword(e.target.value)}}></input>
-                <button type='submit' onClick={handleSubmit}>Submit</button>          
+                { error && <p className='error'>{ error }</p>}
+                <button type='submit' className='submit' onClick={handleSubmit}>Submit</button>          
             </form>
         </div>
   )
