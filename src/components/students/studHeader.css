@@ -1,0 +1,42 @@
+.studBody{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding: 1rem;
+}
+.studProfile{
+    border: 2px solid grey;
+    width: 30%;
+    padding: 1rem;
+    text-align: center;
+}
+.studReview{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+    border: 2px solid grey;
+    width: 60%;
+    padding: 1rem;
+}
+.detailReview{
+    width: 100%;
+}
+.canvas{
+    width: 100%;
+}
+.feedbackform{
+    text-align: center;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background-color: bisque;
+    width: 40vw;
+    height: 40vh;
+    top: 1rem;
+    left: 10vw;
+}
