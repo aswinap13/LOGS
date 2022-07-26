@@ -115,11 +115,7 @@ function AssessComp({ setAssessc, subjectid, los, updated, setUpdated }){
             newquestions[id].learningoutcomes = [lo]
             setQuestions(newquestions) 
         }).catch(err => {
-            console.log(err)
-            if (err.detail) {
-                alert('Please login again....');
-                navigate('/login');
-            } else if (err.Message) {
+            if (err.Message) {
                 setError(err.Message);
             } else {
                 setError('Please try again...');

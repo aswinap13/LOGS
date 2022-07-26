@@ -7,6 +7,24 @@
     border: 1px dashed grey;
     padding: 10px !important;
 }
+.studHead p {
+    margin: 0;
+}
+.studForm {
+    border: 2px solid rgb(97, 97, 97);
+    margin-top: 5px;
+    padding: 1rem;
+}
+.studForm label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.studForm input {
+    width: 100%
+}
+.studForm button {
+    margin-top: 5px;
+}
 .stdIndComp {
     margin-top: 1em;
     padding: 1em;
@@ -26,6 +44,7 @@
 }
 .assesshead p{
     text-align: center;
+    margin: 5px 0;
 }
 .addassess{
     border: 2px solid rgb(97, 97, 97);
@@ -37,6 +56,17 @@
     margin-top: 1rem;
     padding: 1rem;
     border: 1px solid grey;
+}
+.assesslist h4 {
+    margin-bottom: 0px;
+}
+.assesslist button {
+    margin-top: 5px;
+    border: 1px dashed grey;
+}
+.assesslist ul {
+    margin-top: 8px;
+    margin-bottom: 0px;
 }
 
 .feedbackstaff{

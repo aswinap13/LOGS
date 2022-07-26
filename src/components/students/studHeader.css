@@ -85,3 +85,18 @@
 .feedDetail button {
     border: 1px dashed grey;
 }
+
+.responseForm {
+    margin-top: 5px;
+    padding: 1rem;
+    background-color: bisque;
+}
+.responseForm input {
+    width: 50%
+}
+.responseForm button {
+   margin-top: 5px;
+}
+.responseForm div {
+    display: grid;
+}

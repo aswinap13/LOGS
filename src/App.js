@@ -9,6 +9,7 @@ import Login from './components/login/Login';
 import Navbare from './components/navbar/Navbare';
 import Student from './components/students/Student';
 import Teach from './components/teachers/Teach';
+import StudentDetail from './components/teachers/concomponent/StudentDetail';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route exact path='/login' element={<Login />}></Route>
           <Route exact path='/student' element={<Student />}></Route>
           <Route exact path='/Staff' element={<Teach />}></Route>
+          <Route exact path='/student/:id' element={<StudentDetail />}></Route>
       </Routes>
     </Router>
   );

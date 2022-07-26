@@ -4,6 +4,7 @@ import Assessment from './concomponent/Assessment';
 import Student from './concomponent/Student';
 import Feedback from './concomponent/Feedback';
 import { useNavigate } from 'react-router-dom';
+import { GrAddCircle } from 'react-icons/gr';
 
 function Course({ subject }) {
 
@@ -49,6 +50,10 @@ function CourseIn(props){
   const [subdata, setSubdata] = useState(null)
   const [updated, setUpdated] = useState(false)
 
+  const [lovis, setLovis] = useState(false)
+  const [error, setError] = useState(null)
+  const [loname, setLOname] = useState('')
+
 
   const togglestd =()=>{
     setStudv(!studv)
@@ -76,6 +81,11 @@ function CourseIn(props){
     if(studv){
       setStudv(!studv)
     }
+  }
+
+  const showLO = () => {
+    setLOname('')
+    setLovis(!lovis)
   }
 
   let token;
@@ -119,6 +129,44 @@ function CourseIn(props){
     })
   }
 
+  const handleLOAdd = (e) => {
+    e.preventDefault();
+
+    const data = [{name: loname}];
+    const options = { 
+        method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `token ${token}`
+        },
+        body: JSON.stringify(data)
+    }
+
+    fetch(`${process.env.REACT_APP_API_URL}/subjects/${subject.id}/lo/add/`, options)
+    .then(response => {
+    if (response.ok) {
+        return response.json()
+    } else {
+        return response.json().then(text => {throw text})
+    }
+    }).then(data => {
+        setError(null)
+        setLovis(!lovis)
+        setUpdated(!updated)
+        alert('Learning outcome added !!')
+    }).catch(err => {
+      if (err.detail) {
+        alert('Please login again....');
+        navigate('/login');
+      } else if (err.Message) {
+        setError(err.Message);
+      } else {
+        setError('Please try again...');
+      }
+    })
+  }
+
   useEffect(() => {
     if (courseOpen === true) {
       fetchSubject();
@@ -141,9 +189,28 @@ function CourseIn(props){
         </div>
         { subdata &&
           <div className="selecti">
-            { <div className="courseHome">{subdata.description}</div>}
+            <div className="courseHome">
+              <p>{subdata.description}</p>
+              <button className='btn' onClick={showLO}>
+              Add Learning Outcome <GrAddCircle/>
+              </button>
+            </div>
+            { lovis && 
+              <div className='loForm'>
+                  { error && <p className='error'>{ error }</p> }
+                  <label>Learning Outcome:</label>
+                  <input type="text" value={loname} onChange={(e) => setLOname(e.target.value)}></input>
+                  <button onClick={handleLOAdd}>Add</button>
+              </div> }
             {studv &&
-              <div className="courseStudent"><Student students={subdata.students}/></div>
+              <div className="courseStudent">
+                <Student 
+                  subjectid={subject.id}
+                  students={subdata.students}
+                  updated={updated}
+                  setUpdated={setUpdated}
+                />
+              </div>
             }
             {
               assesv && <div className="courseAssess">

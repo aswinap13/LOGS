@@ -52,9 +52,39 @@
 .courseHome{
     text-align: center;
     border: 2px solid grey;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
     padding: 1rem;
+}
+.courseHome p {
+    margin-bottom: 0px;
 }
 .courseStudent,.courseAssess,.courseFeedBack{
     padding: 1rem;
     border: 2px solid grey;
+}
+.loForm {
+    border: 2px solid rgb(97, 97, 97);
+    margin: 5px 0;
+    padding: 1rem;
+}
+.loForm label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.loForm input {
+    width: 100%
+}
+.loForm button {
+    margin-top: 5px;
+}
+.error {
+    text-align: center;
+    color: rgb(216, 33, 33) !important;
+    font-size: large;
+    margin-top: 20px;
+    margin-bottom: -10px;
 }

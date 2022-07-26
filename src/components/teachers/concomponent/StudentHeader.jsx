@@ -4,12 +4,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import './studHeader.css'
 import { useState } from 'react';
-import Graph from './Graph/Graph'
+import Graph from '../../students/Graph/Graph'
 import { useNavigate } from 'react-router-dom';
+import '../../students/studHeader.css'
 
-function Header({ userdata, updated, setUpdated }) {
+function StudentHeader({ userdata, studdata, updated, setUpdated }) {
 
     const [currsub, setCurrsub] = useState(null);
     const [improvelo, setImprovelo] = useState([]);
@@ -37,12 +37,12 @@ function Header({ userdata, updated, setUpdated }) {
     const subChange = (e, id) => {
         e.preventDefault();
 
-        const sub = userdata.subjects.find(s => s.id === id)
+        const sub = studdata.subjects.find(s => s.id === id)
         setCurrsub(sub)
     }
 
     const fetchImprove = (id) => {
-        fetch(`${process.env.REACT_APP_API_URL}/subjects/${id}/lo/improve/${userdata.profile.admission_number}`, options)
+        fetch(`${process.env.REACT_APP_API_URL}/subjects/${id}/lo/improve/${studdata.profile.admission_number}`, options)
         .then(response => {
             if (response.ok) {
             return response.json()
@@ -61,7 +61,7 @@ function Header({ userdata, updated, setUpdated }) {
                 navigate('/login');
             } else if (err.Message) {
                 alert(err.Message);
-                navigate('/login');
+                navigate('/Staff')
             } else {
                 alert('Something occured, please refresh the page...');
             }
@@ -69,15 +69,15 @@ function Header({ userdata, updated, setUpdated }) {
     }
 
     useEffect(() => {
-        if (userdata.subjects.length > 0) {
+        if (studdata.subjects.length > 0) {
             if (currsub !== null) {
-                let sub = userdata.subjects.find(x => x.id === currsub.id)
+                let sub = studdata.subjects.find(x => x.id === currsub.id)
                 setCurrsub(sub)
             } else {
-                setCurrsub(userdata.subjects[0])
+                setCurrsub(studdata.subjects[0])
             }
         }
-    }, [userdata])
+    }, [studdata])
 
     useEffect(() => {
         if (currsub !== null) {
@@ -104,12 +104,12 @@ function Header({ userdata, updated, setUpdated }) {
         </Navbar>
         <div className="studBody">
             <div className="studProfile">
-                <h3>{userdata.first_name} {userdata.last_name}</h3>
-                <p>Admission Number: {userdata.profile.admission_number}</p>
-                <p>Email: {userdata.email}</p>
+                <h3>{studdata.first_name} {studdata.last_name}</h3>
+                <p>Admission Number: {studdata.profile.admission_number}</p>
+                <p>Email: {studdata.email}</p>
                 <p>Details</p>
                 <div className='subjects'>
-                    { userdata.subjects.map(sub => (
+                    { studdata.subjects.map(sub => (
                         <button key={sub.id} onClick={(e) => subChange(e, sub.id)}>{sub.name}</button>
                     )) }
                 </div>
@@ -123,8 +123,8 @@ function Header({ userdata, updated, setUpdated }) {
                         <h5>Progress Graph:</h5>
                         <Graph 
                             subjectid={currsub.id} 
-                            adm_num={userdata.profile.admission_number} 
-                            first_name={userdata.first_name}
+                            adm_num={studdata.profile.admission_number} 
+                            first_name={studdata.first_name}
                             currsub={currsub}
                         ></Graph>
                         <hr></hr>    
@@ -143,7 +143,13 @@ function Header({ userdata, updated, setUpdated }) {
                                 { currsub.assessments.map(ass => (
                                     <div key={ass.id} className="assessDetail">
                                         <p><strong>{ass.title}</strong></p>
-                                        { ass.submitted_on ? <p>Result:</p>: <p>Result pending...</p>}
+                                        { ass.submitted_on ? <p>Result:</p>: <ResponseForm 
+                                                                                assid={ass.id} 
+                                                                                admnum={studdata.profile.admission_number}
+                                                                                updated={updated}
+                                                                                setUpdated={setUpdated}
+                                                                                >Add response
+                                                                            </ResponseForm>}
                                         { ass.submitted_on && 
                                             <ul>
                                                 { ass.response.map(r => (
@@ -151,20 +157,6 @@ function Header({ userdata, updated, setUpdated }) {
                                                 ))}
                                             </ul>}
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-                        <hr></hr>
-                        <div className='feedbacks'>
-                            <h5>Feedbacks:</h5>
-                            <div>    
-                                { currsub.feedbacks.filter(x => x.response === null).map(feed => (
-                                    <StudentFeed 
-                                        key={feed.id}
-                                        feed={feed}
-                                        updated={updated}
-                                        setUpdated={setUpdated}
-                                    ></StudentFeed>
                                 ))}
                             </div>
                         </div>
@@ -177,30 +169,14 @@ function Header({ userdata, updated, setUpdated }) {
   )
 }
 
-const StudentFeed = ({ feed, updated, setUpdated }) => {
-    const [showfeed, setShowfeed] = useState(false);
+const ResponseForm = ({ assid, admnum, updated, setUpdated }) => {
+    const [showres, setShowres] = useState(false);
+    const [questions, setQuestions] = useState([]);
 
-    const showFeed = (e)=> {
+    const toggleShowres = (e) => {
         e.preventDefault();
-        setShowfeed(!showfeed)
+        setShowres(!showres);
     }
-
-    return (
-        <div className="feedDetail">        
-            <p><strong>{feed.title}</strong></p>
-            <button onClick={showFeed}>Add response</button>
-            { showfeed && <FeedForm 
-                            id={feed.id}
-                            updated={updated} 
-                            setUpdated={setUpdated}
-                            ></FeedForm> }
-        </div>
-    )
-}
-
-const FeedForm = ({ id, updated, setUpdated }) => {
-    const [res, setRes] = useState('');
-    const [error, setError] = useState(null);
 
     const navigate = useNavigate()
 
@@ -211,11 +187,68 @@ const FeedForm = ({ id, updated, setUpdated }) => {
         token = localStorage.getItem('logs-token');
     }
 
-    const handleFeed = (e) => {
+    const abortCont = new AbortController();
+
+    const options = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `token ${token}`
+        },
+        signal:abortCont.signal
+    }
+
+    const fetchAssessment = () => {
+        fetch(`${process.env.REACT_APP_API_URL}/subjects/assessment/detail/${assid}/`, options)
+        .then(response => {
+            if (response.ok) {
+            return response.json()
+            } else {
+            return response.json().then(text => {throw text})
+            }
+        }).then(data => {
+            data.questions.forEach(que => {
+                que.mark = ''
+            })
+            setQuestions(data.questions)
+        }).catch(err => {
+            if (err.detail) {
+                alert('Please login again....');
+                navigate('/login');
+            } else if (err.Message) {
+                alert(err.Message);
+                navigate('/Staff')
+            } else {
+                alert('Something occured, please refresh the page...');
+            }
+        })
+    }
+
+    useEffect(() => {
+        if (showres) {
+            fetchAssessment();
+        }
+    }, [showres])
+
+    const changeMark = (e, id) => {
+        let index = questions.findIndex(x => x.id === id)
+        let newquestions = [...questions]
+        newquestions[index].mark = e.target.value
+        setQuestions(newquestions)
+    }
+
+    const addRes = (e) => {
         e.preventDefault();
 
-        const data = {response: res};
-        const options = { 
+        let newquestions = questions
+        newquestions.forEach(que => {
+            delete que.learningoutcomes
+            que.question = que.id
+            delete que.id
+        })
+        const data = {admission_number: admnum, questions: newquestions}
+
+        const postoptions = { 
             method: 'post',
             headers: {
                 'Accept': 'application/json',
@@ -225,35 +258,45 @@ const FeedForm = ({ id, updated, setUpdated }) => {
             body: JSON.stringify(data)
         }
 
-        fetch(`${process.env.REACT_APP_API_URL}/feedback/submit/${id}/`, options)
+        fetch(`${process.env.REACT_APP_API_URL}/subjects/assessment/submit/${assid}/`, postoptions)
         .then(response => {
-        if (response.ok) {
-            return response.json()
-        } else {
-            return response.json().then(text => {throw text})
-        }
+            if (response.ok) {
+                return response.json()
+            } else {
+                return response.json().then(text => {throw text})
+            }
         }).then(data => {
-            setError(null)
             setUpdated(!updated)
-            alert('Feedback response added !!')
+            alert('Response added !!')
         }).catch(err => {
             if (err.detail) {
                 alert('Please login again....');
                 navigate('/login');
             } else if (err.Message) {
-                setError(err.Message);
+                alert(err.Message);
             } else {
-                setError('Please try again...');
+                alert('Something occured, please refresh the page...');
             }
         })
     }
 
-    return(
-        <div className="feedbackform">
-            { error && <p>{ error }</p> }
-            <textarea value={res} onChange={(e) => setRes(e.target.value)}></textarea>
-            <button onClick={handleFeed}>Submit</button>
+
+
+    return (
+        <div> 
+            <button onClick={toggleShowres}>Add Response</button>
+            { showres && 
+                <div className='responseForm'>
+                    { questions.map(que => (
+                        <div key={que.id}>
+                            <label>{que.question}</label>
+                            <input type='number' value={que.mark} onChange={(e) => changeMark(e, que.id)}></input>
+                        </div>
+                    ))}
+                    <button onClick={addRes}>Add</button>
+                </div>}
         </div>
     )
 }
-export default Header
+
+export default StudentHeader

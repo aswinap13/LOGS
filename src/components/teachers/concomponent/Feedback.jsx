@@ -73,15 +73,85 @@ function Feedback({ subjectid, feedv }) {
         { feedcreate && <FeedbackForm setFeedcreate={setFeedcreate} subjectid={subjectid}/>}
         <div>
           {feeds.map(feed => (
-            <div className='assesslist' key={feed.id}>
-                <h4>{feed.title}</h4>
-            </div>
+              <FeedDetail key={feed.id} feed={feed}></FeedDetail>
           ))}
         </div>
     </div>
   )
 }
 
+const FeedDetail = ({ feed }) => {
+
+  const [showres, setShowres] = useState(false)
+  const [responses, setResponses] = useState([])
+
+  const toggleShowres = (e) => {
+    e.preventDefault();
+    setShowres(!showres);
+  }
+
+  const navigate = useNavigate()
+
+  let token;
+  if (localStorage.getItem('logs-token') === null) {
+      navigate('/login');
+  } else {
+      token = localStorage.getItem('logs-token');
+  }
+
+  const abortCont = new AbortController();
+
+  const options = {
+      headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `token ${token}`
+      },
+      signal:abortCont.signal
+  }
+
+  const fetchResponses = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/feedback/${feed.id}/responses/all`, options)
+    .then(response => {
+      if (response.ok) {
+      return response.json()
+      } else {
+      return response.json().then(text => {throw text})
+      }
+    }).then(data => {
+      setResponses(data)
+    }).catch(err => {
+      if (err.detail) {
+        alert('Please login again....');
+        navigate('/login');
+      } else if (err.Message) {
+        alert(err.Message);
+        navigate('/Staff')
+      } else {
+        console.log(err)
+        alert('Something occured, please refresh the page...');
+      }
+    })
+  }
+
+  useEffect(() => {
+    if (showres) {
+      fetchResponses();
+    }
+  }, [showres])
+
+  return (
+    <div className='assesslist'>
+      <h4>{feed.title}</h4>
+      <button onClick={toggleShowres}>Show Responses</button>
+      <ul>
+        { showres && responses.map(res => (
+          <li key={res.student_id}>{res.response}</li>
+        )) }
+      </ul>
+    </div>
+  )
+}
 
 function FeedbackForm({ setFeedcreate, subjectid }){
 
