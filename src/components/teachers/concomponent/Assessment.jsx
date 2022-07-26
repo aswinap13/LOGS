@@ -8,7 +8,11 @@ import './studc.css'
 function Assessment({ subjectid, assessments, los }) {
     const [assessc,setAssessc] = useState(false)
     const addAssess=()=>{
-        setAssessc(!assessc)
+        if (los.length < 1) {
+            alert('Course has no learning outcomes !!')
+        } else {
+            setAssessc(!assessc)
+        }
     }
   return (
     <div>
@@ -26,9 +30,10 @@ function Assessment({ subjectid, assessments, los }) {
 
 function AssessComp({ subjectid, los }){
 
+
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [questions, setQuestions] = useState([{'id': 0, 'question': '', 'learningoutcomes': []}]);
+    const [questions, setQuestions] = useState([{'id': 0, 'question': '', 'learningoutcomes': [{'id': los[0].id, 'name': los[0].name}]}]);
 
     const setQues = (value, id) => {
         let newquestions = [...questions]
@@ -38,7 +43,14 @@ function AssessComp({ subjectid, los }){
 
     const addQues = (e) => {
         e.preventDefault();
-        setQuestions([...questions, {'id': questions.length, 'question': '', 'learningoutcomes': []}])
+        setQuestions([...questions, {'id': questions.length, 'question': '', 'learningoutcomes': [{'id': los[0].id, 'name': los[0].name}]}])
+    }
+
+    const addLO = (e, id) => {
+        e.preventDefault();
+        console.log(e.target.getAttribute('data-id'))
+        let newquestions = [...questions]
+        newquestions[id].learningoutcomes = [] 
     }
 
     return(
@@ -53,11 +65,11 @@ function AssessComp({ subjectid, los }){
                 <label>Description</label>
                 <textarea value={description} onChange={(e) => {setDescription(e.target.value)}}></textarea>
                 {questions.map(que => (    
-                  <div key={que.id}>                 
+                  <div className='addqustn' key={que.id}>                 
                     <label>Question {que.id + 1}: </label>
                     <input name="question" type="text" value={que.question} onChange={(e) => setQues(e.target.value, que.id)}></input>
                     <label>Learning Outcomes</label>
-                    <select>
+                    <select value={que.learningoutcomes[0].name} onChange={(e) => addLO(e, que.id)}>
                         {los.map(lo => (
                             <option key={lo.id} value={lo.name}>{lo.name}</option>
                         ))}
@@ -66,10 +78,10 @@ function AssessComp({ subjectid, los }){
                     <button>Suggest</button>
                   </div>
                 ))}
-                <button className='btn' onClick={addQues}>
+                <button className='btn addNQ' onClick={addQues}>
                 <GrAddCircle/>
                 </button>
-          
+             <button className='btn' type='submit'>Add Test</button>
             </Form>
         </div>
     )
