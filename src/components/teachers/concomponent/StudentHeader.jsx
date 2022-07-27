@@ -122,7 +122,6 @@ function StudentHeader({ userdata, studdata, updated, setUpdated }) {
                         <hr></hr>
                         <h5>Progress Graph:</h5>
                         <Graph 
-                            subjectid={currsub.id} 
                             adm_num={studdata.profile.admission_number} 
                             first_name={studdata.first_name}
                             currsub={currsub}

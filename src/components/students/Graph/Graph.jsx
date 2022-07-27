@@ -26,10 +26,9 @@ ChartJS.register(
 
 
 
-function Graph({ subjectid, adm_num, first_name, currsub }) {
+function Graph({ adm_num, first_name, currsub }) {
 
   const navigate = useNavigate()
-  const [progress, setProgress] = useState([])
   const [labels, setLabels] = useState([]);
   const [marks, setMarks] = useState([]);
   const [graphdata, setGraphdata] = useState(null);
@@ -53,7 +52,7 @@ function Graph({ subjectid, adm_num, first_name, currsub }) {
   }
 
   const fetchProgress = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/subjects/${subjectid}/assessment/progressgraph/${adm_num}/`, options)
+    fetch(`${process.env.REACT_APP_API_URL}/subjects/${currsub.id}/assessment/progressgraph/${adm_num}/`, options)
     .then(response => {
         if (response.ok) {
           return response.json()
@@ -61,7 +60,19 @@ function Graph({ subjectid, adm_num, first_name, currsub }) {
           return response.json().then(text => {throw text})
         }
     }).then(data => {
-        setProgress(data)
+      setLabels(data.map(x => x.title))
+      setMarks(data.map(x => x.mark))
+      
+      setGraphdata({
+        labels,
+        datasets: [
+          {
+            label: `Progress Graph of ${first_name}`,
+            data: marks,
+            borderColor: '#742774',
+          }
+        ],
+      });
     }).catch(err => {
         if (err.detail) {
           alert('Please login again....');
@@ -69,6 +80,7 @@ function Graph({ subjectid, adm_num, first_name, currsub }) {
         } else if (err.Message) {
           alert(err.Message);
         } else {
+          console.log(err.detail)
           alert('Something occured, please refresh the page...');
         }
     })
@@ -79,9 +91,6 @@ function Graph({ subjectid, adm_num, first_name, currsub }) {
   }, [currsub]) 
 
   useEffect(() => {
-    setLabels(progress.map(x => x.title))
-    setMarks(progress.map(x => x.mark))
-
     setGraphdata({
       labels,
       datasets: [
@@ -92,7 +101,7 @@ function Graph({ subjectid, adm_num, first_name, currsub }) {
         }
       ],
     });
-  }, [progress])
+  }, [marks])
 
 
   const graphoptions = {
