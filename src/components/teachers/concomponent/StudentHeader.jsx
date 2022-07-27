@@ -96,9 +96,9 @@ function StudentHeader({ userdata, studdata, updated, setUpdated }) {
                 </Navbar.Brand>
                 <Nav className="me-auto nav-link">
                     <Nav.Link className='navbar-item btn ' variant='danger'><h3>{userdata.first_name} {userdata.last_name}</h3></Nav.Link>
-                    <Nav.Link className='navbar-item btn lastitem' variant='danger'>
+                    {/* <Nav.Link className='navbar-item btn lastitem' variant='danger'>
                     <GiHamburgerMenu/>
-                    </Nav.Link>
+                    </Nav.Link> */}
                 </Nav>
             </Container>
         </Navbar>
@@ -106,8 +106,8 @@ function StudentHeader({ userdata, studdata, updated, setUpdated }) {
             <div className="studProfile">
                 <h3>{studdata.first_name} {studdata.last_name}</h3>
                 <p>Admission Number: {studdata.profile.admission_number}</p>
+                <p>Username: {studdata.username}</p>
                 <p>Email: {studdata.email}</p>
-                <p>Details</p>
                 <div className='subjects'>
                     { studdata.subjects.map(sub => (
                         <button key={sub.id} onClick={(e) => subChange(e, sub.id)}>{sub.name}</button>

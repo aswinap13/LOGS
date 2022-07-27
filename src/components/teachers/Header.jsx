@@ -20,9 +20,9 @@ function Header({ userdata }) {
         </Navbar.Brand>
         <Nav className="me-auto nav-link">
             <Nav.Link className='navbar-item btn ' variant='danger'><StaffC userdata={ userdata }/></Nav.Link>
-            <Nav.Link className='navbar-item btn lastitem' variant='danger'>
+            {/* <Nav.Link className='navbar-item btn lastitem' variant='danger'>
               <GiHamburgerMenu/>
-            </Nav.Link>
+            </Nav.Link> */}
         </Nav>
       </Container>
     </Navbar>
