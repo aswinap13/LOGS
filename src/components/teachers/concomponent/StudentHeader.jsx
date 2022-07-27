@@ -140,22 +140,13 @@ function StudentHeader({ userdata, studdata, updated, setUpdated }) {
                             <h5>Assessments:</h5>
                             <div>    
                                 { currsub.assessments.map(ass => (
-                                    <div key={ass.id} className="assessDetail">
-                                        <p><strong>{ass.title}</strong></p>
-                                        { ass.submitted_on ? <p>Result:</p>: <ResponseForm 
-                                                                                assid={ass.id} 
-                                                                                admnum={studdata.profile.admission_number}
-                                                                                updated={updated}
-                                                                                setUpdated={setUpdated}
-                                                                                >Add response
-                                                                            </ResponseForm>}
-                                        { ass.submitted_on && 
-                                            <ul>
-                                                { ass.response.map(r => (
-                                                    <li key={r.id}>{r.question} | Mark = {r.mark}</li>
-                                                ))}
-                                            </ul>}
-                                    </div>
+                                    <AssessDetail 
+                                        key={ass.id} 
+                                        assess={ass}
+                                        studdata={studdata}
+                                        updated={updated}
+                                        setUpdated={setUpdated}
+                                    ></AssessDetail>
                                 ))}
                             </div>
                         </div>
@@ -166,6 +157,35 @@ function StudentHeader({ userdata, studdata, updated, setUpdated }) {
         </div>
     </div>
   )
+}
+
+const AssessDetail = ({ assess, studdata, updated, setUpdated }) => {
+    const [showres, setShowres] = useState(false)
+
+    const toggleShowres = (e) => {
+        e.preventDefault();
+        setShowres(!showres);
+    }
+
+    return (
+        <div className='assessDetail'>
+            <p><strong>{assess.title}</strong></p>
+            { assess.submitted_on ? <button onClick={toggleShowres}>Show Result</button> : <ResponseForm 
+                                                                                assid={assess.id} 
+                                                                                admnum={studdata.profile.admission_number}
+                                                                                updated={updated}
+                                                                                setUpdated={setUpdated}
+                                                                                >Add response
+                                                                            </ResponseForm>}
+            { assess.submitted_on &&
+              <ul>
+                { showres && assess.response.map(r => (
+                    <li key={r.id}>{r.question} | Mark = {r.mark}</li>
+                ))}
+              </ul>
+            }
+        </div>
+    )
 }
 
 const ResponseForm = ({ assid, admnum, updated, setUpdated }) => {

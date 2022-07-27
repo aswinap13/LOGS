@@ -68,7 +68,8 @@
     border: 1px dashed grey;
 }
 .assessDetail ul {
-    margin-top: 5px;
+    margin-top: 8px;
+    margin-bottom: 0px;
 }
 
 .feedbacks {
